@@ -117,6 +117,16 @@ public class GHOrganization extends GHPerson {
     }
 
     /**
+     * Get membership details of user
+     * @author Johannes Gerbershagen <johannes.gerbershagen@kabelmail.de>
+     */
+    public GHMembership getMemberShipDetails(String username)throws IOException{
+	
+	return root.retrieve().to("/orgs/" + login + "/memberships/" + username, GHMembership.class).wrap(root);
+
+    }
+
+    /**
      * Remove a member of the organisation - which will remove them from
      * all teams, and remove their access to the organization’s repositories.
      */
