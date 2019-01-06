@@ -525,9 +525,9 @@ class Requester {
                         noteRateLimit(tailApiUrl);
                     }
                 }
-            } catch (IOException e) {
-                throw new GHException("Failed to retrieve "+url);
-            }
+	    } catch (IOException e) {
+                throw new GHException("Failed to retrieve "+url,e);
+	    }
         }
 
         /**
