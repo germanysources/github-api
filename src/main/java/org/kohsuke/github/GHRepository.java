@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.WeakHashMap;
 
 import static java.util.Arrays.*;
 import static org.kohsuke.github.Previews.*;
@@ -74,15 +75,14 @@ public class GHRepository extends GHObject {
 
     private String git_url, ssh_url, clone_url, svn_url, mirror_url;
     private GHUser owner;   // not fully populated. beware.
-    private boolean has_issues, has_wiki, fork, has_downloads, has_pages;
+    private boolean has_issues, has_wiki, fork, has_downloads, has_pages, archived;
     @JsonProperty("private")
     private boolean _private;
     private int forks_count, stargazers_count, watchers_count, size, open_issues_count, subscribers_count;
     private String pushed_at, updated_at, created_at;
-    private Map<Integer,GHMilestone> milestones = new HashMap<Integer, GHMilestone>();
-
+    private Map<Integer,GHMilestone> milestones = new WeakHashMap<Integer, GHMilestone>();
     private String default_branch,language;
-    private Map<String,GHCommit> commits = new HashMap<String, GHCommit>();
+    private Map<String,GHCommit> commits = new WeakHashMap<String, GHCommit>();
 
     @SkipFromToString
     private GHRepoPermission permissions;
@@ -404,6 +404,10 @@ public class GHRepository extends GHObject {
 
     public boolean isFork() {
         return fork;
+    }
+
+    public boolean isArchived() {
+        return archived;
     }
 
     /**
