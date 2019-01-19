@@ -30,7 +30,7 @@ public class MalFormedQueryException extends RuntimeException{
     private ArrayNode error;
 
     public MalFormedQueryException(ArrayNode error){
-	super(error.asText());
+	super(error.toString());
 	this.error = error;
     }
 
