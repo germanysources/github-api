@@ -32,7 +32,7 @@ import org.junit.Test;
 import org.junit.Assert;
 import org.junit.Ignore;
 
-@Ignore
+//@Ignore
 public class TestGraphQLSearch extends GraphQLSearch{
 
     private static GitHub root;
@@ -50,18 +50,19 @@ public class TestGraphQLSearch extends GraphQLSearch{
 
     @Test
     public void tgetApiQuery(){
-	String exp = "query($search_term:String!,$results:Int!) { search(query:$search_term, type:REPOSITORY, first:$results){ nodes { ... on Repository{ name url }}}}";
-	Assert.assertEquals("$fields not replaced correct", exp, getApiQuery());
+	String exp = "query($search_term:String!,$results:Int!) { search(query:$search_term, type:REPOSITORY, first:$results){ repositoryCount edges {  cursor } nodes { ... on Repository{ name url }}}}";
+	Assert.assertEquals("$fields not replaced correct", exp, getApiQuery(InitialApiQuery));
     }
 
     @Test
     public void texecute()throws IOException{
 
-	System.out.println("check manually results first 2 results for search term curl org:curl:");
-	execute("curl org:curl", 2);
+	System.out.println("check manually results first 4 results for search term curl org:curl:");
+	executeFirst("curl org:curl", 2);
+	executePagination("curl org:curl", 2);
 
     }
-    
+
     @Override
     protected void putRepositoryCount(int count){
     }
