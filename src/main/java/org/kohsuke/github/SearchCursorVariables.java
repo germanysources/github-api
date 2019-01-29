@@ -43,4 +43,16 @@ public class SearchCursorVariables{
 
     }
 
+    public String getsearch_term(){
+	return search_term;
+    }
+
+    public String getcursor(){
+	return cursor;
+    }
+
+    public int getresults(){
+	return results;
+    } 
+
 }

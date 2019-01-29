@@ -43,11 +43,11 @@ public class SearchVariables{
 
     }
 
-    public String getSearchTerm(){
+    public String getsearch_term(){
 	return search_term;
     }
 
-    public int getResults(){
+    public int getresults(){
 	return results;
     }
 
