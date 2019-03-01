@@ -75,6 +75,22 @@ public abstract class GraphQLSearch{
 
     }
 
+    /** Fetches all found results
+     *
+     */
+    public void execute(String SearchTerm)throws IOException, MalFormedQueryException{
+	
+	int resultPerCall = ResultLimit;
+
+	int fetched = executeFirst(SearchTerm, resultPerCall);
+	while(fetched < count){
+	    if((count - fetched) < resultPerCall)
+		resultPerCall = count - fetched;
+	    fetched += executePagination(SearchTerm, resultPerCall);
+	}
+
+    }
+
     /** executes pagination api call with cursor */
     protected int executePagination(String SearchTerm, int results)throws IOException, MalFormedQueryException{
 	
