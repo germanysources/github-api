@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2018, Johannes Gerbershagen <johannes.gerbershagen@kabelmail.de>
+ * Copyright (c) 2019, Johannes Gerbershagen <johannes.gerbershagen@kabelmail.de>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,25 +23,15 @@
  */
 package org.kohsuke.github;
 
+import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.io.IOException;
 
 public class GHTopics{
-    GitHub root;    
-    
-    public GHTopics (GitHub root){
-	this.root = root;
-    }
-    /**
-     * Get's all topics for a specified repository as array list
-     * @param org the organization or user
-     * @param repoName the repository name (without organization, user)
-     */
-    @Preview
-    public ArrayList<String> getAll(String org, String repoName)throws IOException{
-	HashMap names = root.retrieve().withPreview(Previews.MERCY).to("/repos/"+ org + '/' + repoName + "/topics", HashMap.class);
-	return (ArrayList<String>)names.get("names");
+
+    private List<String> names;
+
+    public List<String> getNames() {
+	return names;
     }
     
 }

@@ -155,21 +155,6 @@ public class GHUser extends GHPerson {
         }
         return orgs;
     }
-    
-    /**
-    * Get only the names
-    */
-    public ArrayList<String> getOrganizationsNames() throws IOException{
-	
-	    ArrayList<String> orgs = new ArrayList<String>();
-	    for(GHOrganization o:root.retrieve().to("/users/" + login + "/orgs", GHOrganization[].class)) {
-	        // to prevend duplicates
-	        if(!orgs.contains(o.getLogin()))
-		        orgs.add(o.getLogin());
-	    }
-	    return orgs;
-    }
-  
 
     /**
      * Lists events performed by a user (this includes private events if the caller is authenticated.

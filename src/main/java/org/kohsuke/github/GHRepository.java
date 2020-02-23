@@ -219,10 +219,6 @@ public class GHRepository extends GHObject {
         return GitHub.parseURL(html_url);
     }
 	
-    public String getHtmlUrlString(){
-	return html_url;    
-    }
-
     /**
      * Short repository name without the owner. For example 'jenkins' in case of http://github.com/jenkinsci/jenkins
      */
@@ -1771,5 +1767,17 @@ public class GHRepository extends GHObject {
      */
     public GHIssueEvent getIssueEvent(long id) throws IOException {
         return root.retrieve().to(getApiTailUrl("issues/events/" + id), GHIssueEvent.class).wrapUp(root);
+    }
+
+    /**
+     * Gets all topics for this repository
+     */
+    @Preview
+    public GHTopics getTopics() throws IOException {
+        StringBuilder urlPath = new StringBuilder();
+        urlPath.append("/repos/");
+	urlPath.append(full_name);
+	urlPath.append("/topics");
+	return root.retrieve().withPreview(Previews.MERCY).to(urlPath.toString(), GHTopics.class);
     }
 }

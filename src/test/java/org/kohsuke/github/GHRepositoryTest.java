@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 import static org.junit.Assume.assumeFalse;
@@ -269,5 +270,9 @@ public class GHRepositoryTest extends AbstractGitHubWireMockTest {
         assertFalse(r.isAllowSquashMerge());
     }
 
-
+    @Test
+    public void getTopics() throws IOException {
+	GHRepository r=gitHub.getRepository("github-api/github-api");
+	assertThat(r.getTopics().getNames(), hasItem("github-api"));
+    }
 }
